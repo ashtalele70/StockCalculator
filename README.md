@@ -1,0 +1,2 @@
+# StockCalculator
+Python Flask Project
