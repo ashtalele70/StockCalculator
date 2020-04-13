@@ -19,4 +19,4 @@ def get_multiply10(num):
 
 
 if __name__ == '__main__':
-    app.run(host="52.53.165.168", port=5000, debug=True)
+    app.run(debug=True)
