@@ -1,22 +1,15 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, request, render_template
+from stockProfitCalculator import StockProfitCalculator
 app = Flask(__name__)
 
-@app.route("/home")
-def home():
-    return render_template('LandingPage.html')
-
 @app.route("/", methods=['GET','POST'])
-def index():
-    if(request.method == 'POST'):
-        some_json = request.get_json()
-        return jsonify({'you sent': some_json}), 201
+def home():
+    result = ''
+    if (request.method == 'GET'):
+        return render_template('LandingPage.html', result=result)
     else:
-        return jsonify({'about': 'Hello World'})
-
-@app.route('/multi/<int:num>', methods=['GET'])
-def get_multiply10(num):
-    return jsonify({'result': num * 10})
-
+        result = StockProfitCalculator().calculateProfit(request.form)
+        return render_template('ResultPage.html', result=result)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="localhost", port=5000, debug=True)
